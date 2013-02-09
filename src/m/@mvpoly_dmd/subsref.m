@@ -1,5 +1,3 @@
-% -*- matlab -*-
-
 function q = subsref(p, s)
     
     if (isempty(s))

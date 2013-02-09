@@ -1,7 +1,9 @@
-% -*- matlab -*-
-
 function p = mvpoly_dmd(a)
-
+% MVPOLY_DMD  Create multivariate polynomial (DMD)
+%
+% some docs here of course
+%
+    
     if (nargin == 0)
         p.coef = [0];
         p = class(p, 'mvpoly_dmd');

@@ -1,5 +1,3 @@
-% -*- matlab -*- 
-
 function x = subsasgn(x, ss, val)
 
     ss.subs = cellfun(@exp2sub, ss.subs, 'UniformOutput', false);
