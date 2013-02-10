@@ -23,27 +23,10 @@ function c = pluspad(a, b)
 %   0   0   1
 %
    
-    sa = size(a);
-    sb = size(b);
-    da = numel(sa);
-    db = numel(sb);
-    dc = max(da, db);
-    sa = [ sa ones(dc-da, 1) ];
-    sb = [ sb ones(dc-db, 1) ];
-    sc = max(sa, sb);
-    c  = zeros(sc);
-    
-    for i = 1:da
-        suba{i} = 1:sa(i);
-    end
-    idx = substruct('()', suba);
-    c = subsasgn(c, idx, a);
-    
-    for i = 1:db
-        subb{i} = 1:sb(i);
-    end
-    idx = substruct('()', subb);
-    c0 = subsref(c, idx) + b;
-    c = subsasgn(c, idx, c0);
+    [idxa, idxb, sz] = padidx(a, b);
+    c = zeros(sz);
+    c = subsasgn(c, idxa, a);
+    c0 = subsref(c, idxb) + b;
+    c = subsasgn(c, idxb, c0);
     
 end
