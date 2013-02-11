@@ -1,3 +1,6 @@
+% unit tests for octave
+test('unit_octave', 'normal');
+
 %!test
 %! p = mvpoly_cube();
 %! assert(class(p) == 'mvpoly_cube','has correct class');
