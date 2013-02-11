@@ -6,7 +6,7 @@ function p = mvpoly_cube(a)
 % this is for dense polyomials, those with few
 % zero coefficients.
     
-    classname = 'mvpoly_cube'
+    classname = 'mvpoly_cube';
     if (nargin == 0)
         p.coef = [0];
         p = class(p, classname);
