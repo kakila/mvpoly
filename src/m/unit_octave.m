@@ -3,6 +3,14 @@
 
 test("unit_octave", "normal");
 
+%!# ------- mvpoly -------------
+
+%!test "common constuctor";
+%! p = mvpoly('cube', ones(3));
+%! assert(isa(p, 'mvpoly_cube'), 'wrong class');
+
+%!# ------- mvpoly_cube -------------
+
 %!test "constructor class, no argument";
 %! p = mvpoly_cube();
 %! assert(isa(p,"mvpoly_cube"), "incorrrect class");
