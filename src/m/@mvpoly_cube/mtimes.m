@@ -18,6 +18,12 @@ function q = mtimes(p1, p2)
         m2 = p2.coef;
     end
     
-    q = mvpoly_cube( convn(m1, m2) );
+    if (numel(m1) == 1) || (numel(m2) == 1)
+        m3 = m1 * m2
+    else
+        m3 = convn(m1, m2);
+    end
+        
+    q = mvpoly_cube(m3);
     
 end

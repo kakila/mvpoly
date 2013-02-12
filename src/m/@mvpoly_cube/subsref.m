@@ -7,7 +7,8 @@ function q = subsref(p, s)
     switch ( s(1).type )
       
       case '()'
-        s(1).subs = cellfun(@exp2sub, s(1).subs, 'UniformOutput', false);   
+        subs = subsnorm(cellfun(@exp2sub, s(1).subs, 'UniformOutput', false));
+        s(1).subs = subs;
         q = subsref(p.coef, s);
       
       case '.'

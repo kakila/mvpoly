@@ -32,36 +32,65 @@ test("unit_octave", "normal");
 
 %!test "block assign";
 %! p = mvpoly_cube();
-%! p(0:1,0:1) = eye(2);
+%! p(0:1, 0:1) = eye(2);
 %! assert(p.coef == eye(2), "bad assign");
-%! p(0:1,0:1) = 1;
+%! p(0:1, 0:1) = 1;
 %! assert(p.coef == ones(2), "bad assign");
 
 %!test "simple sum";
 %! p = mvpoly_cube(); q = mvpoly_cube();
-%! p(1,0) = 1; q(0,1) = 1;
+%! p(1, 0) = 1; q(0, 1) = 1;
 %! r = p + q;
 %! assert(isa(r,"mvpoly_cube"), "bad class for sum");
-%! assert((r(0,0) == 0) && (r(1,0) == 1) && (r(0,1) == 1), "bad sum");
+%! assert((r(0, 0) == 0) && (r(1, 0) == 1) && (r(0, 1) == 1), "bad sum");
 
 %!test "sum of different orders";
-%! p = mvpoly_cube(ones(2,2,2)) + mvpoly_cube(ones(3,3));
+%! p = mvpoly_cube(ones(2, 2, 2)) + mvpoly_cube(ones(3, 3));
 %! assert(size(p.coef) == [3 3 2], "incorrect size");
 
 %!test "difference of different orders";
-%! p = mvpoly_cube(ones(2,2,2)) - mvpoly_cube(ones(3,3));
+%! p = mvpoly_cube(ones(2, 2, 2)) - mvpoly_cube(ones(3, 3));
 %! assert(size(p.coef) == [3 3 2], "incorrect size");
 
 %!test "evaluation";
 %! p = mvpoly_cube();
-%! p(0,0) = -1; p(2,0) = 1; p(0,2) = 2;
+%! p(0, 0) = -1; p(2, 0) = 1; p(0, 2) = 2;
 %! assert(polyval(p, [1,2]) == 8, "incorrect point evaluation"); 
 %! [x,y] = meshgrid(1:2);
 %! xy = cat(3, x, y);
 %! assert(polyval(p, xy) == [2, 5 ; 8, 11], "incorrect grid evaluation");
 
-%!xtest "multiplication";
+%!test "multiplication, simple bivariate";
 %! p = mvpoly_cube(); q = mvpoly_cube();
-%! p(0,0) = 1; q(0,0) = 1; p(1,0) = 1; q(0,1) = 2;
+%! p(0, 0) = 1; q(0, 0) = 1; p(1, 0) = 1; q(0, 1) = 2;
 %! r = p * q;
-%! assert( r.coef == [1, 1; 2, 2] );
+%! assert(r(0, 0), 1, eps);
+%! assert(r(1, 0), 1, eps);
+%! assert(r(0, 1), 2, eps);
+%! assert(r(1, 1), 2, eps);
+
+%!test "multiplication, linearity of evaluation";
+%! p = mvpoly_cube(rand(3, 3, 3)); 
+%! q = mvpoly_cube(rand(4, 4, 4));
+%! x = rand(1,3);
+%! assert((polyval(p, x) * polyval(q, x)) / polyval(p*q, x), 1, 2*eps);
+
+%!test "multiplication, dimension promotion I";
+%! p = mvpoly_cube(); q = mvpoly_cube();
+%! p(0) = 1; p(1) = 1;
+%! q(0, 0) = 1; q(0, 1) = 1;
+%! r = p * q;
+%! assert(r(0, 0), 1, eps);
+%! assert(r(1, 0), 1, eps);
+%! assert(r(0, 1), 1, eps);
+%! assert(r(1, 1), 1, eps);
+
+%!test "multiplication, dimension promotion II";
+%! p = mvpoly_cube(); q = mvpoly_cube();
+%! p(0) = 1; p(1) = 1;
+%! q(0, 0, 0) = 1; q(1, 0, 0) = 1;
+%! r = p * q;
+%! assert(r(0, 0), 1, eps);
+%! assert(r(1, 0), 2, eps);
+%! assert(r(2, 0), 1, eps);
+
