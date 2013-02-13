@@ -8,6 +8,7 @@ $(BUILD) :
 	mkdir -p $(BUILD)
 	cp -r ../m/* $(BUILD)/
 	cp doc/* $(BUILD)/
+	sh ../changelog.sh > $(BUILD)/ChangeLog
 
 source : $(BUILD)
 
@@ -18,4 +19,4 @@ package : $(PKG)
 
 clean :
 	rm -rf mvpoly-$(VER)
-	rm $(PKG)
+	rm -f $(PKG)
