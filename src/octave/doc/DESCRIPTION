@@ -1,0 +1,10 @@
+Name: mvpoly
+Version: 0.90
+Date: 2013-03-13
+Author: J.J. Green (j.j.green@gmx.co.uk)
+Maintainer: J.J. Green (j.j.green@gmx.co.uk)
+Title: Multivariate polynomials
+Description: A library for the (numeric) manipulation of 
+  multivariate polynomials.
+Categories: polynomial
+License: LGPLv3

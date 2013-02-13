@@ -12,6 +12,9 @@ $(BUILD) :
 
 source : $(BUILD)
 
+install : $(PKG)
+	octave --eval "pkg -verbose install $(PKG)"
+
 $(PKG) : $(BUILD)
 	tar -zcvf $(PKG) $(BUILD)
 
