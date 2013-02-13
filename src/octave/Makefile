@@ -1,25 +1,28 @@
 # Makefile for octave package
 
-VER   = 0.90
-BUILD = mvpoly-$(VER)
-PKG   = $(BUILD).tar.gz
+NAME = mvpoly
+VER  = 0.90
+PKG  = $(NAME)-$(VER).tar.gz
 
-$(BUILD) :
-	mkdir -p $(BUILD)
-	cp -r ../m/* $(BUILD)/
-	cp doc/* $(BUILD)/
-	sh ../changelog.sh > $(BUILD)/ChangeLog
+source : $(NAME)
 
-source : $(BUILD)
+$(NAME) :
+	mkdir -p $(NAME)/inst
+	cp -r ../m/* $(NAME)/inst
+	cp doc/* $(NAME)/
+	sh ../changelog.sh > $(NAME)/ChangeLog
 
 install : $(PKG)
-	octave --eval "pkg -verbose install $(PKG)"
+	octave --eval "pkg install $(PKG)"
 
-$(PKG) : $(BUILD)
-	tar -zcvf $(PKG) $(BUILD)
+uninstall : $(PKG)
+	octave --eval "pkg uninstall $(NAME)"
+
+$(PKG) : $(NAME)
+	tar -zcvf $(PKG) $(NAME)
 
 package : $(PKG)
 
 clean :
-	rm -rf mvpoly-$(VER)
+	rm -rf $(NAME)/
 	rm -f $(PKG)
