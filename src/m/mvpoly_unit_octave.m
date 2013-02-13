@@ -1,7 +1,7 @@
 #! /usr/bin/octave -q
 # unit tests for octave, this will not work in matlab
 
-test("unit_octave", "normal");
+test("mvpoly_unit_octave", "normal");
 
 %!# ------- mvpoly -------------
 
