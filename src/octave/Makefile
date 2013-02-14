@@ -4,6 +4,8 @@ NAME = mvpoly
 VER  = 0.90
 PKG  = $(NAME)-$(VER).tar.gz
 
+default all : package
+
 source : $(NAME)
 
 $(NAME) :
@@ -12,16 +14,16 @@ $(NAME) :
 	cp doc/* $(NAME)/
 	sh ../changelog.sh > $(NAME)/ChangeLog
 
-install : $(PKG)
-	octave --eval "pkg install $(PKG)"
-
-uninstall : $(PKG)
-	octave --eval "pkg uninstall $(NAME)"
-
 $(PKG) : $(NAME)
 	tar -zcvf $(PKG) $(NAME)
 
 package : $(PKG)
+
+install : package
+	octave --eval "pkg install $(PKG)"
+
+uninstall :
+	octave --eval "pkg uninstall $(NAME)"
 
 clean :
 	rm -rf $(NAME)/
