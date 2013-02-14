@@ -94,3 +94,8 @@ test("mvpoly_unit_octave", "normal");
 %! assert(r(1, 0), 2, eps);
 %! assert(r(2, 0), 1, eps);
 
+%!test "homogeneous degree";
+%! p = mvpoly_cube();
+%! assert(homdeg(p), -1);
+%! p(10,1) = 1; p(6,6) = 1; p(10,10) = 0;
+%! assert(homdeg(p), 12);
