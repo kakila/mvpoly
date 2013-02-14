@@ -57,57 +57,56 @@ function y = polyval_cube(p, x)
 %    
 %    10 Feb 2013 : initial octave version
 
-      % check arguments
+    if nargin ~= 2
+        error('exactly 2 arguments required')
+    end
 
-      if nargin ~= 2
-          error('exactly 2 arguments required')
-      end
+    % size of last dimension of x
 
-      % size of last dimension of x
-
-      if isvector(x)
-          ndx  = 1;
-          sldx = length(x);
-      else
-          dx   = size(x);
-          ndx  = numel(dx);
-          sldx = dx(ndx);
-      end
-      
-      % number of dimensions of p
-      
-      dp = size(p);
-      ndp = numel(dp);
-      
-      % check dimensions match
-      
-      if ndp ~= sldx
-          error('size of last dim of x should equal number of dims of p')
-      end
-      
-      % reshape x if needed
-  
-      if ndx > 1
-          x = reshape(x, prod(dx(1:ndx-1)), sldx);
-      end
-  
-      % call recursive subfunction
-      
-      y = pvn2(p, x);
-      
-      % reshape y to the same pattern as x if needed
-      
-      if ndx > 2
-          y = reshape(y, dx(1:ndx-1));
-      end
-      
-  end
+    if isvector(x)
+        ndx  = 1;
+        sldx = length(x);
+    else
+        dx   = size(x);
+        ndx  = numel(dx);
+        sldx = dx(ndx);
+    end
+    
+    % number of dimensions of p
+    
+    dp = size(p);
+    ndp = numel(dp);
+    
+    % check dimensions match
+    
+    if ndp ~= sldx
+        error('size of last dim of x should equal number of dims of p')
+    end
+    
+    % reshape x if needed
+    
+    if ndx > 1
+        x = reshape(x, prod(dx(1:ndx-1)), sldx);
+    end
+    
+    % call recursive subfunction
+    
+    y = pvn2(p, x);
+    
+    % reshape y to the same pattern as x if needed
+    
+    if ndx > 2
+        y = reshape(y, dx(1:ndx-1));
+    end
+    
+end
   
 % recurse over the dimensions of p, evaluating using
 % polyval() at the leaves of the recursion but pvn3()
 % as we accumulate the totals
 
 function y = pvn2(p, x) 
+
     if isvector(p)
         y = polyval(flipdim(p), x);
         return;
@@ -125,15 +124,18 @@ function y = pvn2(p, x)
     end
     
     y = pvn3(p1, x(:, 1));
+
 end
 
 % this is like polyval() except that p is an matrix
 % with the same number of rows as x 
 
 function y = pvn3(p, x) 
+
     n = size(p, 2);
     y = p(:, n);
     for k = (n-1):-1:1
         y = y.*x + p(:, k);
     end 
+
 end

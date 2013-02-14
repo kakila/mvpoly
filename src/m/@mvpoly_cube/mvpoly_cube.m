@@ -7,13 +7,13 @@ function p = mvpoly_cube(a)
 % zero coefficients.
     
     classname = 'mvpoly_cube';
-    if (nargin == 0)
+    if nargin == 0
         p.coef = [0];
         p = class(p, classname);
-    elseif (nargin == 1)
-        if (strcmp(class(a), classname))
+    elseif nargin == 1
+        if isa(a, classname)
             p = a;
-        elseif (ismatrix(a) && isnumeric(a))
+        elseif ismatrix(a) && isnumeric(a)
             p.coef = a;
             p = class(p, classname);
         else
