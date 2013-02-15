@@ -17,7 +17,7 @@ function d = homdeg(p)
     [sub{:}] = ind2sub(sz, find(p.coef));
     d = max(sum([sub{:}] - 1, 2));
     if numel(d) == 0
-        d = -1;
+        error('homdeg undefined for zero mvpoly');
     end
     
 end

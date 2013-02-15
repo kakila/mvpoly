@@ -96,6 +96,12 @@ test("mvpoly_unit_octave", "normal");
 
 %!test "homogeneous degree";
 %! p = mvpoly_cube();
-%! assert(homdeg(p), -1);
 %! p(10,1) = 1; p(6,6) = 1; p(10,10) = 0;
 %! assert(homdeg(p), 12);
+
+%!test "order";
+%! p = mvpoly_cube(zeros(4,4,4));
+%! p(1,1,0) = 1; 
+%! assert(order(p),[1,1,0]);
+%! p(1,2,3) = 1;
+%! assert(order(p),[1,2,3]);
