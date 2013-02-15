@@ -19,7 +19,7 @@ code is anticipated to be feature-complete mid-2013.
 ### Example
 
 In the following octave session we create the polynomial
-*p*(*x*,*y*) = 1 + *x* + 2*y* and evaluate it at *x* = *y* = 1.
+p(x,y) = 1 + x + 2y and evaluate it at x = y = 1.
 
 	octave:1> p = mvpoly('cube');
 	octave:2> p(0,0) = p(1,0) = 1;
