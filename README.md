@@ -6,9 +6,9 @@ A library for the numeric treatment of multivariate polynomials.
 
 In the first instance, to provide a number of basic operations 
 (addition, multiplication, evaluation) on dense and sparse 
-multivariate polynomials in a uniform and intuitive in a number 
-of high-level numerical programming environments (Octave, 
-Python, Maltab).  
+multivariate polynomials in a uniform and intuitive manner in 
+a number of high-level numerical programming environments 
+(Octave, Python, Maltab).  
 
 ## Status
 
