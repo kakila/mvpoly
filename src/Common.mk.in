@@ -1,0 +1,4 @@
+# Common Makefile definitions
+
+PACKAGE_VERSION = @PACKAGE_VERSION@
+PACKAGE_NAME    = @PACKAGE_NAME@

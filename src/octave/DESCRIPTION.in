@@ -1,13 +1,13 @@
-Name: mvpoly
-Version: 0.90.2
-Date: 2013-02-17
-Author: J.J. Green (j.j.green@gmx.co.uk)
-Maintainer: J.J. Green (j.j.green@gmx.co.uk)
+Name: @PACKAGE_NAME@
+Version: @PACKAGE_VERSION@
+Date: @PACKAGE_DATE@
+Author: @PACKAGE_BUGREPORT@
+Maintainer: @PACKAGE_BUGREPORT@
 Title: Multivariate polynomials
 Description: A library for the (numeric) manipulation of 
   multivariate polynomials.
 Categories: polynomial
-Url: http://soliton.vm.bytemark.co.uk/pub/jjg/
+Url: @PACKAGE_URL@
 Autoload: yes
 License: LGPL v3 or later
 

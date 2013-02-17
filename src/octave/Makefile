@@ -1,10 +1,12 @@
 # Makefile for octave package
 
-NAME = mvpoly
-VER  = 0.90.1
+NAME = $(PACKAGE_NAME)
+VER  = $(PACKAGE_VERSION)
 PKG  = $(NAME)-$(VER).tar.gz
 
 default all : package
+
+include ../Common.mk
 
 source : $(NAME)
 
