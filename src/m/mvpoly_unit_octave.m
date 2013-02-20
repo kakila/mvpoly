@@ -104,4 +104,20 @@ test("mvpoly_unit_octave", "normal");
 %! p(1,1,0) = 1; 
 %! assert(order(p),[1,1,0]);
 %! p(1,2,3) = 1;
-%! assert(order(p),[1,2,3]);
+%! assert(order(p), [1,2,3]);
+%! p = mvpoly_cube(); p(12) = 1;
+%! assert(order(p), [12]);
+
+%!test "compose variable exchange";
+%! p = mvpoly_cube(rand(3));
+%! x = mvpoly_cube(); x(1,0) = 1;
+%! y = mvpoly_cube(); y(0,1) = 1;
+%! assert(p.coef, compose(p, x, y).coef, eps);
+%! assert(p.coef, transpose(compose(p, y, x).coef), eps);
+
+%!test "compose simple example";
+%! p = mvpoly_cube();
+%! p(2) = 1;
+%! x = mvpoly_cube();
+%! x(0,1) = x(1,0) = 1;
+%! q = compose(p, x);
