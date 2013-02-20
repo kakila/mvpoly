@@ -19,7 +19,7 @@ function q = mtimes(p1, p2)
     end
     
     if (numel(m1) == 1) || (numel(m2) == 1)
-        m3 = m1 * m2
+        m3 = m1 * m2;
     else
         m3 = convn(m1, m2);
     end
