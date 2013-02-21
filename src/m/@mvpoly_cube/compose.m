@@ -4,36 +4,41 @@ function q = compose(p, varargin)
 % If p is a mutlivariate polynomial in n variables and
 % X, Y, ... are multivariate polynomaials then
 %
-%  q = compose(p, X, Y, ...)
+%   q = compose(p, X, Y, ...)
 %
 % returns the polynomial obtained by subtituting 
 % X, Y, ... into the variables of p. As an example,
 % if p = X^2 + 2Y, the substuting X = x+y, Y = y
 % gives
 %
-%  (x+y)^2 + 2(y) = x^2 + 2xy + y^2 + 2y
+%   (x+y)^2 + 2(y) = x^2 + 2xy + y^2 + 2y
 %
+% This is not perticularly fast since we do quite a
+% bit of iteration in the interpreter
     
-    sz   = order(p);
-    nvar = numel(sz);
-    coef = p.coef;
+    ords = order(p);
+    N    = numel(ords);
+    C    = p.coef;
     
-    if nvar != numel(varargin)
+    if N != numel(varargin)
         error('wrong number of arguments');
     end
         
-    % precompute powers of X, Y, ...
+    % precompute powers of polynomials to substitute,
+    % stored in the cell array of cell arrays X, 
+    % X{i}{n} is the n-th power of the i-th polynomial 
+    % to substitute
     
-    pv = cell(nvar, 1);
+    X = cell(N, 1);
     
-    for i = 1:nvar
-        v = cell(sz(i), 1);
-        vi = varargin{i};
-        v{1} = vi;
-        for j = 2:sz(i)
-            v{j} = v{j-1} * vi;
+    for i = 1:N
+        Xi = cell(ords(i), 1);
+        Xi1 = varargin{i};
+        Xi{1} = Xi1;
+        for n = 2:ords(i)
+            Xi{n} = Xi{n-1} * Xi1;
         end
-        pv{i} = v;
+        X{i} = Xi;
     end
 
     % return value
@@ -42,24 +47,25 @@ function q = compose(p, varargin)
     
     % iterate over monomials with nonzero coefficients
     
-    csz = size(coef);
-    sub = cell(nvar,1);
-    nzi = find(coef);
+    Csz = size(C);
+    sub = cell(N,1);
+    nz  = find(C);
 
-    for i = 1:numel(nzi)
+    for i = 1:numel(nz)
 
-        % get v, monomial for this coefficient
+        % get M, monomial for this coefficient
         
-        [sub{:}] = ind2sub(csz, nzi(i));
-        v = mvpoly_cube(1);
+        [sub{:}] = ind2sub(Csz, nz(i));
+        M = mvpoly_cube(1);
         for j = 1:numel(sub)
-            if sub{j} > 1
-                v = v * pv{j}{sub{j} - 1};
+            n = sub{j} - 1;
+            if n
+                M = M * X{j}{n};
             end
         end
 
-        q = q + coef(nzi(i)) * v;
+        q = q + C(nz(i)) * M;
     
     end
-    
+
 end
