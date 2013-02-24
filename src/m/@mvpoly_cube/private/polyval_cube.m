@@ -63,20 +63,25 @@ function y = polyval_cube(p, x)
 
     % size of last dimension of x
 
+    dx = size(x);    
     if isvector(x)
         ndx  = 1;
-        sldx = length(x);
+        sldx = dx(2);
     else
-        dx   = size(x);
         ndx  = numel(dx);
         sldx = dx(ndx);
     end
     
     % number of dimensions of p
-    
-    dp = size(p);
-    ndp = numel(dp);
-    
+   
+    if isvector(p)
+        db = numel(p);
+        ndp = 1;
+    else
+        dp = size(p);
+        ndp = numel(dp);
+    end
+ 
     % check dimensions match
     
     if ndp ~= sldx
