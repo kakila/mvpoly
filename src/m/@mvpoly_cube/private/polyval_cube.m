@@ -1,36 +1,36 @@
 function y = polyval_cube(p, x) 
-%POLYVAL  evaluate a multivariate polynomial
+% POLYVAL_CUBE - evaluate a multivariate polynomial
 %
-%    The n-variate polynomial p, represented as an n-dimensional
-%    array, is evaluated for each value in the array x. The last 
-%    dimension of x should be of size n corresponding to the n
-%    variables in the polynomial.
+% The n-variate polynomial p, represented as an n-dimensional
+% array, is evaluated for each value in the array x. The last 
+% dimension of x should be of size n corresponding to the n
+% variables in the polynomial.
 % 
-%    In contrast to the convention used in the Matlab builtin
-%    polyval(), the lowest order coefficient of the polynomial 
-%    comes first in the array, and we take the first index to 
-%    be the index of the x-coefficient, the second of the 
-%    y-coefficient and so on. For a bivariate polynomial the array 
-%    is a matrix and we have this sort of structure
+% In contrast to the convention used in the Matlab builtin
+% polyval(), the lowest order coefficient of the polynomial 
+% comes first in the array, and we take the first index to 
+% be the index of the x-coefficient, the second of the 
+% y-coefficient and so on. For a bivariate polynomial the array 
+% is a matrix and we have this sort of structure
 %
 %     [  1,    y, ... ,    y^m 
 %        x,   xy, ... ,   xy^m  
 %        :     :, ... ,    :
 %      x^n, x^ny, ... , x^ny^m
 %    
-%    Example: the polynomial x^2 + 2y^2 - 1 
+% Example: the polynomial x^2 + 2y^2 - 1 
 %
 %      p = [-1, 0, 2;
 %            0, 0, 0;
 %            1, 0, 0]
 %
-%    Evaluated at x=1, y=2 
+% Evaluated at x=1, y=2 
 %
 %      polyval_cube(p, [1,2])
 %      ans = 8
 % 
-%    Evaluated at x,y = 1,..,5: we generate a 5x5x2 array xy
-%    with the x values in xy(:,;,1), the y values in xy(:,:,2)
+% Evaluated at x,y = 1,..,5: we generate a 5x5x2 array xy
+% with the x values in xy(:,;,1), the y values in xy(:,:,2)
 %
 %      [x,y] = meshgrid(1:5)
 %      xy = cat(3, x, y)
@@ -42,20 +42,15 @@ function y = polyval_cube(p, x)
 %         32   35   40   47   56
 %         50   53   58   65   74
 %
-%    The evaluation method is a nested Horner's rule which is
-%    implemented recursively. No attempt is made to exploit the 
-%    sparsity (if any) of the polynomial. 
+% The evaluation method is a nested Horner's rule which is
+% implemented recursively. No attempt is made to exploit the 
+% sparsity (if any) of the polynomial. 
 %
-%    NOTE - this file is based on the polyvaln.m by the same
-%    author, the files differ in whether or not they interpret 
-%    the input array in the same way as Matlab builtin polyval.
+% NOTE - this file is based on the polyvaln.m by the same
+% author, the files differ in whether or not they interpret 
+% the input array in the same way as Matlab builtin polyval.
 %
-%    Copyright (c) 2013, J.J. Green
-%    $Id$
-%
-%    Changes
-%    
-%    10 Feb 2013 : initial octave version
+% Copyright (c) 2013, J.J. Green
 
     if nargin ~= 2
         error('exactly 2 arguments required')

@@ -1,5 +1,5 @@
 function d = homdeg(p)
-% HOMDEG  homogeneous degree of multivariate polynomial
+% HOMDEG - homogeneous degree of multivariate polynomial
 %
 % The homogeneous degree of a monomial is the sum of its
 % exponents (so x has homogeneous degree 1, xy^2 has 
@@ -9,7 +9,7 @@ function d = homdeg(p)
 %
 % Note that a polynomial with only zero coefficients does
 % not have a homogeneous degree, and this this case the 
-% function will return -1.
+% function will raise an error.
     
     sz = size(p.coef);
     nd = numel(sz);

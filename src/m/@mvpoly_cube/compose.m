@@ -1,5 +1,5 @@
 function q = compose(p, varargin)
-%COMPOSE - compose multivariate polynomials
+% COMPOSE - compose multivariate polynomials
 %
 % If p is a mutlivariate polynomial in n variables and
 % X, Y, ... are multivariate polynomaials then

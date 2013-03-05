@@ -1,5 +1,5 @@
 function p = mvpoly(storage, varargin)
-% MVPOLY  multivariate polynomial class constructor
+% MVPOLY - multivariate polynomial class constructor
 %
 % A call to
 %
@@ -29,6 +29,8 @@ function p = mvpoly(storage, varargin)
 %   p = mvpoly('cube', p);
 %
 % will convert p to use the cube storage method. 
+%
+% See also @mvpoly_cube/mvpoly_cube
     
     switch storage
       case 'cube'

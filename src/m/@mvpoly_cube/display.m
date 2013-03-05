@@ -1,6 +1,9 @@
 function display(p)
-% DISPLAY  display a multivariate polynomial
-
+% DISPLAY - display a multivariate polynomial
+%
+% Presently this method simply lists the coefficients
+% of the polynomial
+    
     sz  = size(p.coef);
     nd  = numel(sz);
     if sz(nd) == 1

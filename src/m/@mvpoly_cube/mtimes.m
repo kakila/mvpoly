@@ -1,10 +1,18 @@
 function q = mtimes(p1, p2)
-% MMULT  multiply multivariate polynomials
+% MTIMES - multiply multivariate polynomials
+%
+% The call
+%
+%    c = mtimes(a, b)
+%
+% (or equvalently, c = a*b) returns the product of
+% polynomials a and b.
 %
 % For a cubic representation of a multivariate
-% polynomial, multiplication is easy and fast,
-% since is can be performed by convolution which
-% is just the FFT.
+% polynomial, this product is easy and fast since is 
+% can be performed by convolution (via the FFT).
+%
+% See also fft
     
     if isnumeric(p1)
         m1 = p1;

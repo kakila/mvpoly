@@ -1,12 +1,13 @@
 function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
-%MAXMODND   maximum modulus of an n-variate complex polynomial on the polydisc
-%   The maximum modulus of a complex n-variate polynomial p on 
-%   the unit n-polydisc is estimated using a method of repeated 
-%   subdivision of [0,2pi]^n and rejection of non-maximizing 
-%   n-cubes. 
+% MAXMODND - maximum modulus of an n-variate polynomial on the polydisc
 %
-%   The rejection criterion is based on a lemma of S.B. Steckin,
-%   extended to n-variate polynomials by G. De La Chevrotière [1]
+% The maximum modulus of a complex n-variate polynomial p on 
+% the unit n-polydisc is estimated using a method of repeated 
+% subdivision of [0,2pi]^n and rejection of non-maximizing 
+% n-cubes. 
+%
+% The rejection criterion is based on a lemma of S.B. Steckin,
+% extended to n-variate polynomials by G. De La Chevrotière [1]
 %
 %   [M, t, h, evals] = MAXMODND(p, epsilon, verbose, i0)
 %
@@ -21,24 +22,26 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
 %   h        a length vectot of half-width of non-rejected n-cubes 
 %   evals    total number of evaluations of the polynomial
 %    
-%   The algorithm is based in that described in [1] and [2]
+% The algorithm is based in that described in [1] and [2]
 %
-%   References
+% References
 %
-%   [1] G. De La Chevrotière. "Finding the maximum modulus of a
-%       polynomial on the polydisk using a generalization of 
-%       Steckin's lemma", SIAM Undergrad. Res. Online, 2, 2009.
+% [1] G. De La Chevrotière. "Finding the maximum modulus of a
+%     polynomial on the polydisk using a generalization of 
+%     Steckin's lemma", SIAM Undergrad. Res. Online, 2, 2009.
 %
-%   [2] J.J. Green. "Calculating the maximimum modulus of a polynomial
-%       with Steckin's lemma". SIAM J. Numer. Anal., 83:211-222, 2000. 
+% [2] J.J. Green. "Calculating the maximimum modulus of a polynomial
+%     with Steckin's lemma". SIAM J. Numer. Anal., 83:211-222, 2000. 
 %    
-%   Copyright (c) J.J.Green 2013
+% Copyright (c) J.J.Green 2012, 2013
 %
-%   Note that this file is derived from the file of the same name
-%   distributed as a stand-alone file for Matlab/Octave; the 
-%   difference with that file is that it uses an n-dimensional
-%   array to represent the polynomial p, whereas this file uses
-%   an mvpoly object.
+% Note that this file is derived from the file of the same name
+% distributed as a stand-alone file for Matlab/Octave; the 
+% difference with that file is that it uses an n-dimensional
+% array to represent the polynomial p, whereas this file uses
+% an mvpoly object.
+%
+% See also mvpoly
     
 % get options
 

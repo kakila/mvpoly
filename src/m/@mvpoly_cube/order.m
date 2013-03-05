@@ -1,5 +1,5 @@
 function v = order(p)
-% ORDER  order of variables in a multivariate polynomial
+% ORDER - order of variables in a multivariate polynomial
 %
 % The order of a variable in a polynomial is the largest
 % exponent of that variable occurring in monomials with
@@ -9,6 +9,8 @@ function v = order(p)
 %
 % This function will exit with an error if passed the 
 % zero polynomial.
+%
+% See also homdeg
     
     sz = size(p.coef);
     nd = numel(sz);
