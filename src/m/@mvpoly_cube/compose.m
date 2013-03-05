@@ -1,5 +1,5 @@
 function q = compose(p, varargin)
-% COMPOSE  compose multivariate polynomials
+%COMPOSE - compose multivariate polynomials
 %
 % If p is a mutlivariate polynomial in n variables and
 % X, Y, ... are multivariate polynomaials then
@@ -13,7 +13,7 @@ function q = compose(p, varargin)
 %
 %   (x+y)^2 + 2(y) = x^2 + 2xy + y^2 + 2y
 %
-% This is not perticularly fast since we do quite a
+% This is not particularly fast since we do quite a
 % bit of iteration in the interpreter
     
     ords = order(p);
