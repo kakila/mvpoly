@@ -3,3 +3,4 @@ config.status
 configure
 config.log
 src/Common.mk
+src/octave/doc/DESCRIPTION

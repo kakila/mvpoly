@@ -16,7 +16,10 @@ function v = order(p)
     nd = numel(sz);
     sub = cell(nd, 1);
     [sub{:}] = ind2sub(sz, find(p.coef));
-    v = max([sub{:}], [], 1) - 1;
+    for i = 1:numel(sub)
+        w(i,:) = sub{i}(:)';
+    end
+    v = max(w', [], 1) - 1;
     switch numel(v)
       case 0
         error('order undefined for zero mvpoly');

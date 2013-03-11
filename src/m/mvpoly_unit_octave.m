@@ -96,7 +96,7 @@ test("mvpoly_unit_octave", "normal");
 
 %!test "homogeneous degree";
 %! p = mvpoly_cube();
-%! p(10,1) = 1; p(6,6) = 1; p(10,10) = 0;
+%! p(10, 1) = 1; p(6, 6) = 1; p(10, 10) = 0;
 %! assert(homdeg(p), 12);
 
 %!test "order";
@@ -107,6 +107,9 @@ test("mvpoly_unit_octave", "normal");
 %! assert(order(p), [1,2,3]);
 %! p = mvpoly_cube(); p(12) = 1;
 %! assert(order(p), [12]);
+%! p = mvpoly('cube');
+%! p(0,0) = p(0,5) = 1;
+%! assert(order(p), [0, 5]);
 
 %!test "compose variable exchange";
 %! p = mvpoly_cube(rand(3));
