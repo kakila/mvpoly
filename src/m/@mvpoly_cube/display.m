@@ -19,7 +19,7 @@ function display(p)
             fprintf(',%i',sub{m}-1);
         end
         fprintf(') : ');
-        if iscomplex(c)
+        if ~isreal(c)
             rc  = real(c);
             ic  = imag(c);
             if rc < 0

@@ -20,7 +20,7 @@ function q = compose(p, varargin)
     N    = numel(ords);
     C    = p.coef;
     
-    if N != numel(varargin)
+    if N ~= numel(varargin)
         error('wrong number of arguments');
     end
         
