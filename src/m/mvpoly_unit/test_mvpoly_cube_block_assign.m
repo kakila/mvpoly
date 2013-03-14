@@ -1,4 +1,5 @@
 function test_mvpoly_cube_block_assign()
+% mvpoly_cube block assign unit tests
     
     p = mvpoly_cube();
 

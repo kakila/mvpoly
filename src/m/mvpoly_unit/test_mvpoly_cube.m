@@ -1,4 +1,5 @@
 function test_mvpoly_cube()
+% mvpoly_cube constructor unit tests
     
     p = mvpoly_cube();
     assert(isa(p, 'mvpoly_cube'), 'constructor without argument');

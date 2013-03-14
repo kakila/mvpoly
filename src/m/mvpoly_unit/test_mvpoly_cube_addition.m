@@ -1,4 +1,5 @@
 function test_mvpoly_cube_addition()
+% mvpoly_cube add/subtract unit tests
     
     p = mvpoly_cube();
     q = mvpoly_cube();

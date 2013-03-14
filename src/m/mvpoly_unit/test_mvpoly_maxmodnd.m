@@ -1,4 +1,5 @@
 function test_mvpoly_maxmodnd()
+% mvpoly maxmodnb unit tests
     
     p = mvpoly_cube();
     p(0) = p(10) = 1;

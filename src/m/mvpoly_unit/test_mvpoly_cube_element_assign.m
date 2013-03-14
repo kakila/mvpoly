@@ -1,4 +1,5 @@
 function test_mvpoly_cube_element_assign()
+% mvpoly_cube assignement unit tests
     
     p = mvpoly_cube();
     p(1, 2, 3) = 1;

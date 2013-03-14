@@ -1,4 +1,5 @@
 function test_mvpoly_cube_multiply()
+% mvpoly_cube multiplication unit tests
     
     p = mvpoly_cube(); q = mvpoly_cube();
     p(0, 0) = 1; q(0, 0) = 1; p(1, 0) = 1; q(0, 1) = 2;

@@ -1,9 +1,9 @@
 dnl autoconf for mvpoly
 AC_INIT([mvpoly], 
-	[0.90.5], 
+	[0.90.6], 
 	[J.J. Green (j.j.green@gmx.co.uk)],,
 	[http://soliton.vm.bytemark.co.uk/pub/jjg/])
-AC_SUBST(PACKAGE_DATE, "2013-03-10")
+AC_SUBST(PACKAGE_DATE, "2013-03-14")
 AC_OUTPUT([src/octave/doc/DESCRIPTION:src/octave/DESCRIPTION.in
 	src/Common.mk])
 

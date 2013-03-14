@@ -1,4 +1,5 @@
 function test_mvpoly_cube_compose()
+% mvpoly_cube composition unit tests
     
     p = mvpoly_cube(rand(3));
     x = mvpoly_cube(); 
