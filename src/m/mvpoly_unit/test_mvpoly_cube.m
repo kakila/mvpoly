@@ -9,5 +9,5 @@ function test_mvpoly_cube()
 
     a = rand(5, 5, 5);
     p = mvpoly_cube(a);
-    assert(p.coef == a, 'constructor data retention');
+    assert(array_equal(p.coef, a), 'constructor data retention');
 

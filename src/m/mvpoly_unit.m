@@ -5,7 +5,7 @@ addpath(unit_path);
 
 err = 0;
 
-tfiles = dir(strcat(unit_path,'/','*.m'));
+tfiles = dir(strcat(unit_path,'/','test_*.m'));
 ntfiles = length(tfiles);
 
 for i = 1:ntfiles

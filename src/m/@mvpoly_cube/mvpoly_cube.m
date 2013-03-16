@@ -31,7 +31,7 @@ function p = mvpoly_cube(a)
     elseif nargin == 1
         if isa(a, classname)
             p = a;
-        elseif ismatrix(a) && isnumeric(a)
+        elseif isnumeric(a)
             p.coef = a;
             p = class(p, classname);
         else
