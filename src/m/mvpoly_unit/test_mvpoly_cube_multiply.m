@@ -4,7 +4,7 @@ function test_mvpoly_cube_multiply()
     p = mvpoly_cube(); q = mvpoly_cube();
     p(0, 0) = 1; q(0, 0) = 1; p(1, 0) = 1; q(0, 1) = 2;
     r = p * q;
-    assert(abs(r.coef - [1,2;1,2]) < eps, 'simple compose')
+    assert(array_equal(r.coef, [1, 2 ; 1, 2], eps), 'simple compose')
 
     p = mvpoly_cube(rand(3, 3, 3)); 
     q = mvpoly_cube(rand(4, 4, 4));
@@ -19,7 +19,7 @@ function test_mvpoly_cube_multiply()
     q(0, 0) = 1; 
     q(0, 1) = 1;
     r = p * q;
-    assert(abs(r.coef - [1, 1 ; 1, 1]) < eps, 'dimension promote I');
+    assert(array_equal(r.coef, [1, 1 ; 1, 1], eps), 'dimension promote I');
 
     p = mvpoly_cube();
     p(0) = 1; 

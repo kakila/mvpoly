@@ -108,7 +108,7 @@ end
 function y = pvn2(p, x) 
 
     if isvector(p)
-        y = polyval(flipdim(p), x);
+        y = polyval(flipdim(p(:), 1), x);
         return;
     end
 

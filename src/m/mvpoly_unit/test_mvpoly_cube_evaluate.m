@@ -10,5 +10,5 @@ function test_mvpoly_cube_evaluate()
     % grid evaluation
     [x,y] = meshgrid(1:2);
     xy = cat(3, x, y);
-    assert(polyval(p, xy) == [2, 5 ; 8, 11], 'grid evaluation');
+    assert(array_equal(polyval(p, xy),[2, 5 ; 8, 11]), 'grid evaluation');
 
