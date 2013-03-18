@@ -13,8 +13,9 @@ a number of high-level numerical programming environments
 ## Status
 
 This is a work-in-progress. The implementation of dense multivariate 
-polynomials in Octave is more-or-less complete.  The sparse Octave 
-code is anticipated to be feature-complete mid-2013.
+polynomials in Octave and Matlab is more-or-less complete. The 
+Python dense code will be next, followed by the Python sparse
+code.
 
 ### Example
 
@@ -37,7 +38,6 @@ p(x,y) = 1 + x + 2y and evaluate it at x = y = 1.
 
 Contributions are most welcome, particularly
 
-* Testing and, if needed, porting the Octave code to Matlab
 * Porting to Python
 * The sparse polynomial code
 

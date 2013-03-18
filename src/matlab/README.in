@@ -1,0 +1,26 @@
+This is the Matlab version of @PACKAGE_NAME@ @PACKAGE_VERSION@ (@PACKAGE_DATE@)
+
+  @PACKAGE_URL@
+
+for details on the package.
+
+To install, unzip the package into a suitable directory
+(such as the directory listed by the "userpath" command
+at the Matlab prompt), and then add the mvpoly directory
+to your Matlab search path; either using the 
+
+  File -> Set Path -> Add Folder
+
+route in the Matlab GUI, or by adding a line such as
+
+  addpath('/home/username/matlab/mvpoly');
+
+to your startup.m
+
+You can test your setup by running 
+
+  mvpoly_unit
+
+at the Matlab prompt.
+
+@PACKAGE_BUGREPORT@

@@ -2,7 +2,7 @@
 
 NAME = $(PACKAGE_NAME)
 VER  = $(PACKAGE_VERSION)
-PKG  = $(NAME)-octave-$(VER).tar.gz
+PKG  = $(NAME)-matlab-$(VER).zip
 
 default all : package
 
@@ -11,21 +11,21 @@ include ../Common.mk
 source : $(NAME)
 
 $(NAME) :
-	mkdir -p $(NAME)/inst
-	cp -r ../m/* $(NAME)/inst
+	mkdir -p $(NAME)/
+	cp -r ../m/* $(NAME)/
 	cp doc/* $(NAME)/
 	sh ../changelog.sh > $(NAME)/ChangeLog
 
 $(PKG) : $(NAME)
-	tar -zcvf $(PKG) $(NAME)
+	zip -r $(PKG) $(NAME)
 
 package : $(PKG)
 
 install : package
-	octave --quiet --eval "pkg install $(PKG)"
+	echo "matlab installation is manual"
 
 uninstall :
-	octave --quiet --eval "pkg uninstall $(NAME)"
+	echo "nothing to do"
 
 clean :
 	rm -rf $(NAME)/

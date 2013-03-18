@@ -1,4 +1,4 @@
-BUILD = octave
+BUILD = octave matlab
 
 all : 
 	for dir in $(BUILD) ; do cd $$dir ; $(MAKE) all ; cd .. ; done
