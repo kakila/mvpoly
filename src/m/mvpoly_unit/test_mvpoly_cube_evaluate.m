@@ -1,14 +1,28 @@
 function test_mvpoly_cube_evaluate()
 % mvpoly_cube evaluate unit tests
-    
+
     p = mvpoly_cube();
-    p(0, 0) = -1; p(2, 0) = 1; p(0, 2) = 2;
-    
-    % point evaluation
-    assert(polyval(p, [1, 2]') == 8, 'point evaluation'); 
-    
-    % grid evaluation
+    p(0) = -1; 
+    p(2) =  1;
+    assert(polyval(p, 2) == 3, 'univariate point evaluation');
+
+    p = mvpoly_cube();
+    p(0, 0) = -1; 
+    p(2, 0) =  1; 
+    p(0, 2) =  2;    
+    assert(polyval(p, [1, 2]') == 8, 'bivariate point evaluation'); 
+
     [x,y] = meshgrid(1:2);
-    xy = cat(3, x, y);
-    assert(array_equal(polyval(p, xy),[2, 5 ; 8, 11]), 'grid evaluation');
+    xy(1,:,:) = x;
+    xy(2,:,:) = y;
+    assert(array_equal(polyval(p, xy),[2, 5 ; 8, 11]), ...
+           'bivariate grid evaluation');
+
+    p = mvpoly_cube();
+    p(0, 0, 0) = -1; 
+    p(2, 0, 0) =  1; 
+    p(0, 2, 0) =  2;    
+    p(0, 0, 2) =  3;
+    assert(polyval(p, [1, 2, 3]') == 35, 'trivariate point evaluation'); 
+    
 

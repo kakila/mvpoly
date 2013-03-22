@@ -2,9 +2,10 @@ function y = polyval_cube(p, x)
 % POLYVAL_CUBE - evaluate a multivariate polynomial
 %
 % The n-variate polynomial p, represented as an n-dimensional
-% array, is evaluated for each value in the array x. The last 
+% array, is evaluated for each value in the array x. The first 
 % dimension of x should be of size n corresponding to the n
-% variables in the polynomial.
+% variables in the polynomial (ie, the number of dimensions
+% of the array of coefficients of p).
 % 
 % In contrast to the convention used in the Matlab builtin
 % polyval(), the lowest order coefficient of the polynomial 
@@ -16,7 +17,7 @@ function y = polyval_cube(p, x)
 %     [  1,    y, ... ,    y^m 
 %        x,   xy, ... ,   xy^m  
 %        :     :, ... ,    :
-%      x^n, x^ny, ... , x^ny^m
+%      x^n, x^ny, ... , x^ny^m ]
 %    
 % Example: the polynomial x^2 + 2y^2 - 1 
 %
@@ -26,14 +27,17 @@ function y = polyval_cube(p, x)
 %
 % Evaluated at x=1, y=2 
 %
-%      polyval_cube(p, [1,2])
+%      polyval_cube(p, [1 2]')
 %      ans = 8
 % 
-% Evaluated at x,y = 1,..,5: we generate a 5x5x2 array xy
-% with the x values in xy(:,;,1), the y values in xy(:,:,2)
+% (note that the second argument is a column vector)
+% 
+% Evaluated at x,y = 1,..,5: we generate a 2x5x5 array xy
+% with the x values in xy(1,:,:), the y values in xy(2,:,:)
 %
 %      [x,y] = meshgrid(1:5)
-%      xy = cat(3, x, y)
+%      xy(1,:,:) = x
+%      xy(2,:,:) = y
 %      polyval_cube(p, xy)
 %      ans =
 %          2    5   10   17   26
@@ -55,87 +59,70 @@ function y = polyval_cube(p, x)
     if nargin ~= 2
         error('exactly 2 arguments required')
     end
-
-    % size of last dimension of x
-
-    dx = size(x);    
-    if isvector(x)
-        ndx  = 1;
-        sldx = dx(2);
-    else
-        ndx  = numel(dx);
-        sldx = dx(ndx);
-    end
     
-    % number of dimensions of p
+    % number of variables of p
    
-    if isvector(p)
-        db = numel(p);
-        ndp = 1;
+    dp = size(p);
+    if iscolumn(p)
+        nvp = 1;
     else
-        dp = size(p);
-        ndp = numel(dp);
+        nvp = numel(dp);
     end
- 
+
+    vp = dp(1:nvp);
+    
+    % size of first dimension of x
+
+    dx = size(x);
+    if iscolumn(x)
+        ndx = 1;
+    else
+        ndx = numel(dx);
+    end
+
     % check dimensions match
     
-    if ndp ~= sldx
-        error('size of last dim of x should equal number of dims of p')
+    if nvp ~= dx(1)
+        error(strcat('size of first dim of x (%i)',...
+                     ' should equal number of dims of p (%i)'),...
+              dx(1), nvp);
     end
     
-    % reshape x if needed
+    % reshape x if needed and call recursive function
     
-    if ndx > 1
-        x = reshape(x, prod(dx(1:ndx-1)), sldx);
+    if ndx == 1
+        y = pvn2(p, vp, nvp, x);
+    else
+        x = reshape(x, dx(1), prod(dx(2:ndx)));
+        y = pvn2(p, vp, nvp, x);
+        y = reshape(y, dx(2:ndx));
     end
-    
-    % call recursive subfunction
-    
-    y = pvn2(p, x);
-    
-    % reshape y to the same pattern as x if needed
-    
-    if ndx > 2
-        y = reshape(y, dx(1:ndx-1));
-    end
-    
+     
 end
-  
-% recurse over the dimensions of p, evaluating using
-% polyval() at the leaves of the recursion but pvn3()
-% as we accumulate the totals
 
-function y = pvn2(p, x) 
+function y = pvn2(p, vp, nvp, x)
 
-    if isvector(p)
+    if nvp == 1
         y = polyval(flipdim(p(:), 1), x);
         return;
     end
-
-    d  = size(p);
-    nd = numel(d);
     
-    c(1:nd-1) = {':'};
-    x0 = x(:, 2:nd);
+    c(1:nvp-1) = {':'};
     
-    for i = 1:d(1)
+    for i = 1:vp(nvp)
         p0 = squeeze(p(i, c{:}));
-        p1(:, i) = pvn2(p0, x0);
+        p1(i, :) = pvn2(p0, vp(1:nvp-1), nvp-1, x(2:nvp, :));
     end
-    
-    y = pvn3(p1, x(:, 1));
 
+    y = pvn3(p1, vp(1), x(1, :));
+    
 end
 
-% this is like polyval() except that p is an matrix
-% with the same number of rows as x 
+function y = pvn3(p, n, x) 
 
-function y = pvn3(p, x) 
-
-    n = size(p, 2);
-    y = p(:, n);
+    y = p(n, :);
     for k = (n-1):-1:1
-        y = y.*x + p(:, k);
+        y = y.*x + p(k, :);
     end 
 
 end
