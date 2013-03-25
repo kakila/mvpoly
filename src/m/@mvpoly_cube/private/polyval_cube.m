@@ -130,7 +130,12 @@ function y = polyval_cube(p, varargin)
     else
         x = reshape(x, dx(1), prod(dx(2:ndx)));
         y = pvn2(p, vp, nvp, x);
-        y = reshape(y, dx(2:ndx));
+        if ndx == 2
+            % for matlab reshape prissiness
+            y = reshape(y, dx(2), 1);
+        else
+            y = reshape(y, dx(2:ndx));
+        end
     end
      
 end
