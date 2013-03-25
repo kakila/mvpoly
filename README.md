@@ -31,8 +31,14 @@ p(x,y) = 1 + x + 2y and evaluate it at x = y = 1.
 		(1,0) :   1.000000
 		(0,1) :   2.000000
 		(1,1) :   0.000000
-	octave:5> polyval(p, [1, 1])
+	octave:5> polyval(p, 1, 1)
 	ans =  4
+
+Create data for plotting the same polynomial on the square 
+
+    octave:5> L = linspace(-1, 1, 20);
+	octave:6> [x, y] = meshgrid(L, L);
+	octave:7> z = polyval(p, x, y);
 
 ## Contributions  
 
