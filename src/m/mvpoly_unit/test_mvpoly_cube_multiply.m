@@ -8,7 +8,7 @@ function test_mvpoly_cube_multiply()
 
     p = mvpoly_cube(rand(3, 3, 3)); 
     q = mvpoly_cube(rand(4, 4, 4));
-    x = rand(1,3);
+    x = rand(3, 1);
     err = abs(1 - (polyval(p, x) * polyval(q, x)) / polyval(p*q, x));
     assert(err < 2*eps, 'distribute over evaluation');
 

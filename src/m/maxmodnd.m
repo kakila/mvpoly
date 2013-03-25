@@ -93,7 +93,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
     t  = t0;
     
     for i = 2:n
-        t = [repmat(t,i0,1),kron(t0,ones(i0^(i-1),1))];
+        t = [repmat(t,i0,1), kron(t0, ones(i0^(i-1), 1))];
     end
     
     clear t0;
@@ -116,7 +116,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
         % evaluate polynomial
 
         z  = exp(t .* 1i);
-        pz = polyval(p, z);
+        pz = polyval(p, z.');
         qz = real(pz).^2 + imag(pz).^2;
         
         eval0 = numel(qz);
@@ -124,7 +124,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
 
         % evaluate bounds
         
-        M2min = max(M2min,max(qz));
+        M2min = max(M2min, max(qz));
         SC    = cos(hd*h);
         M2max = M2min/SC;
 

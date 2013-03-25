@@ -16,9 +16,9 @@ function test_mvpoly_cube_compose()
     p = mvpoly_cube(rand(3));
     x = mvpoly_cube(rand(3));
     y = mvpoly_cube(rand(3));
-    v = rand(1,2);
+    v = rand(2,1);
     A = polyval(compose(p, x, y), v);
-    B = polyval(p, [polyval(x, v), polyval(y, v)]);
+    B = polyval(p, polyval(x, v), polyval(y, v));
     assert(abs((A - B)/(A + B)) < eps, 'distribute evaluate over compose');
 
     p = mvpoly_cube();

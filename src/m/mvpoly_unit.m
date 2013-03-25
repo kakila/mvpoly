@@ -1,7 +1,7 @@
 % simple octave/matlab test harness 
 
-pattern = 'evaluate';
-% pattern = '';
+% pattern = 'evaluate';
+pattern = '';
 
 warning('error', 'Octave:broadcast');
 unit_path = mfilename('fullpath');
