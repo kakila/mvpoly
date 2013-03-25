@@ -72,7 +72,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
     end
     
     if verbose
-        fprintf('polynomial of %i variables, degree %i\n',n, hd);
+        fprintf('polynomial of %i variables, degree %i\n', n, hd);
     end
     
     % sanity bounds on input
@@ -89,11 +89,12 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
     
     h = pi./i0;
 
-    t0 = [0:i0-1]';
+    t0 = [0:i0-1];
     t  = t0;
     
     for i = 2:n
-        t = [repmat(t,i0,1), kron(t0, ones(i0^(i-1), 1))];
+        t = [repmat(t, 1, i0) 
+             kron(t0, ones(1, i0^(i-1)))];
     end
     
     clear t0;
@@ -116,7 +117,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
         % evaluate polynomial
 
         z  = exp(t .* 1i);
-        pz = polyval(p, z.');
+        pz = polyval(p, z);
         qz = real(pz).^2 + imag(pz).^2;
         
         eval0 = numel(qz);
@@ -149,14 +150,14 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
         ind = find(qz > rT);
 
         if verbose
-            nrej = size(t,1) - numel(ind);
+            nrej = size(t, 2) - numel(ind);
             fprintf('%f\t%f\t%i\t%i\n',...
                     sqrt(M2min),...
                     sqrt(M2max),...
                     eval0,nrej);
         end
 
-        t = t(ind,:);
+        t = t(:, ind);
         
         % subdivision
 	% 
@@ -178,20 +179,20 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
 
         % record previous size of t
         
-	m = size(t,1);
+	m = size(t, 2);
         
         % make 2^n copies of it
         
-	t = repmat(t,2^n,1);
+	t = repmat(t, 1, 2^n);
  
         % add +/- h to the columns of t in a similar
-        % vetorised fashion to that of the initial 
+        % vectorised fashion to that of the initial 
         % constuction of t
         
         for i = 1:n
-	    t(:,i) = t(:,i) + ...
-                h * repmat(kron([1;-1],ones(m*2^(i-1),1)),...
-                              2^(n-i),1);
+	    t(i, :) = t(i, :) + ...
+                h * repmat(kron([1,-1], ones(1, m*2^(i-1))),...
+                           1, 2^(n-i));
         end
     end
     
@@ -200,7 +201,7 @@ function [M, t, h, evals] = maxmodnd(p, epsilon, verbose, i0)
     M = sqrt((M2min+M2max)/2);
     
     if verbose
-        fprintf('maxmod %.8f in %i evaluations\n',M,evals);
+        fprintf('maxmod %.8f in %i evaluations\n', M, evals);
     end
     
 end
