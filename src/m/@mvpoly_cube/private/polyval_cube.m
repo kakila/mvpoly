@@ -84,7 +84,7 @@ function y = polyval_cube(p, varargin)
     else
         nvp = numel(dp);
     end
-
+    
     vp = dp(1:nvp);
     
     % other arguments
@@ -153,11 +153,11 @@ function y = pvn2(p, vp, nvp, x)
     
     c = colons(nvp-1);
     
-    for i = 1:vp(nvp)
+    for i = 1:vp(1)
         p0 = squeeze(p(i, c{:}));
         p1(i, :) = pvn2(p0, vp(1:nvp-1), nvp-1, x(2:nvp, :));
     end
-
+    
     y = pvn3(p1, vp(1), x(1, :));
     
 end
